@@ -25,7 +25,7 @@ Biblioteca * cria_biblioteca(int max){
     b->max = max;
     b->tamanho = 0;
     b->colecao = (Livros**) calloc(max,sizeof(Livros));
-    if(b->colecao==NULL){
+    if(b->colecao == NULL){
         printf("ERRO AO ALOCAR MEMORIA!\n");
         exit(1);
     }
@@ -37,29 +37,32 @@ void cria_livro (Biblioteca* b,int cod, char *titulo,char *autor, int ano) {
         printf("ERRO AO ALOCAR MEMORIA!\n");
         exit(1);
     }
-    for(int i = 0; i<(b->tamanho) ;i++){
+    for(int i = 0; i<(b->tamanho); i++){
         if(b->colecao[i]->codigo == cod){
             printf("Ja existe um livro com este codigo");
             return;
-        }
-        
+        }   
     }
     l->codigo = cod;
-    for(int i=0;i<strlen(titulo);i++){
+    for(int i=0; i<strlen(titulo); i++){
         l->titulo[i] = titulo[i];
     }
-    for(int i=0;i<strlen(autor);i++){
+    for(int i=0; i<strlen(autor); i++){
         l->autor[i] = autor[i];
     }
     l->ano = ano;
     append(b,l);
 }
 void libera(Biblioteca* b){
+    while(b->tamanho){
+        free(b->colecao[b->tamanho]);
+        b->tamanho--;
+    }
     free(b->colecao);
     free(b);
 }
 void acessa(Biblioteca* b,int cod){
-    for(int i = 0; i<(b->tamanho);i++){
+    for(int i = 0; i<(b->tamanho); i++){
         if(b->colecao[i]->codigo == cod){
             printf("\nRESULTADO DA BUSCA:\n");
             printf("\nAno: %d\n",b->colecao[i]->ano);
