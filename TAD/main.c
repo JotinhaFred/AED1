@@ -10,5 +10,5 @@ int main(){
     remove_livro(b,1);
     exibe(b);
     libera(b);
-
+    
 }
