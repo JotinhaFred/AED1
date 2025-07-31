@@ -11,22 +11,24 @@ typedef struct no {
 }Fila;
 Fila *prim,*q,*p,*fim;
 int main(){
-    prim,q,p = NULL;
-    int n,op,max = 0;
+    prim = NULL;
+    q = NULL;
+    p = NULL;
+    int n=0,op,max = 0;
     int conta = 0;
     while(op!=6){   
-        printf("Escolha :\n0 - define tamanho\n1 - inserir elem\n2 - remover elem\n3 - visualizar primeiro elemento\n4 - listar elem\n5 - verificar se esta vazia\n");
+        printf("Escolha :\n0 - define tamanho\n1 - inserir elem\n2 - remover elem\n3 - visualizar primeiro elemento\n4 - listar elem\n5 - verificar se esta vazia\n6 - sair\n\n");
         scanf("%d",&op);
         switch (op){
         case 0:
-            system("clear");
+            
             printf("defina o tamanho da fila\n\n");
             scanf("%d",&max);
             
             break;
         case 1:
-            system("clear");
-            if(n>=max){
+            
+            if(conta>=max){
                 printf("Lista cheia\n\n");
                 break;
             }
@@ -37,20 +39,20 @@ int main(){
             
             break;
         case 2:
-            system("clear");
+            
             remover();
             conta--;
             break;
         case 3:
-            system("clear");
+            
             visualizar();
             break;
         case 4:
-            system("clear");
+            
             listar();
             break;
         case 5:
-            system("clear");
+            
             verifica_vazia();
             break;
         default:
@@ -74,11 +76,14 @@ void inserir(int val){
     fim = p;
 }
 void remover(){
+    int val;
+    Fila *aux;
     if(prim!=NULL){
-        printf("%d\n\n",prim->val);
-        
+        val = prim->val;
+        printf("Removendo o %d\n\n",val);
+        aux = prim;
         prim = prim->prox;
-        
+        free(aux);
     }
     else{
         printf("Lista vazia\n\n");
@@ -87,8 +92,10 @@ void remover(){
 }
 void visualizar(){
     if(prim!=NULL){
-        printf("%d\n\n",prim->val);
+        printf("Primeiro elemento %d\n\n",prim->val);
+        return;
     }
+    printf("Fila vazia\n\n");
     
 }
 void listar(){

@@ -5,8 +5,6 @@ void torre(int n, char origem, char destino, char auxiliar) {
         printf("Disco %d de %c para %c\n", n, origem, destino);
         return;
     }
-
-    
     torre(n - 1, origem, auxiliar, destino);
 
     printf("Disco %d de %c para %c\n", n, origem, destino);
