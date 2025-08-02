@@ -16,53 +16,45 @@ int main(){
     p = NULL;
     prim = NULL;
     fim = NULL;
-    int n=0,op,max = 0;
-    int conta = 0;
-    while(op!=6){
-        printf("Escolha :\n0 - define tamanho\n1 - inserir elem\n2 - remover elem\n3 - visualizar primeiro elemento\n4 - listar elem\n5 - verificar se esta vazia\n6 - sair\n\n");
+    int n=0,op;
+    
+    while(op!=6){   
+        printf("Escolha :\n1 - inserir elem\n2 - remover elem\n3 - visualizar primeiro elemento\n4 - listar elem\n5 - verificar se esta vazia\n6 - sair\n\n");
         scanf("%d",&op);
         switch (op){
-        case 0:
-
-            printf("Defina o tamanho da Lista\n\n");
-            scanf("%d",&max);
-
-            break;
+        
         case 1:
-
-            if(conta>=max){
-                printf("Lista cheia\n\n");
-                break;
-            }
+            
+            
             printf("Digite um inteiro para inserir: \n\n");
             scanf("%d",&n);
             inserir(n);
-            conta++;
-
+            
+            
             break;
         case 2:
             printf("Digite um inteiro para remover: \n\n");
             scanf("%d",&n);
             remover(n);
-            conta--;
+            
             break;
         case 3:
-
+            
             visualizar();
             break;
         case 4:
-
+            
             listar();
             break;
         case 5:
-
+            
             verifica_vazia();
             break;
         default:
             break;
         }
     }
-
+    
 }
 void inserir(int val){
     p = (Lista*) malloc(sizeof(Lista));
@@ -80,42 +72,50 @@ void inserir(int val){
     q = p;
 }
 void remover(int val){
-
-    if(prim->val == val){
-        printf("Removendo %d\n\n",val);
-
-        free(prim);
-        p=NULL;
-        q=NULL;
-        fim=NULL;
-        prim = NULL;
+    Lista *aux = prim;
+    if(aux == NULL){
+        printf("Lista vazia\n\n");
         return;
     }
-    Lista *aux = prim;
-
+    if(prim->val == val){
+        printf("Removendo %d\n\n",val);
+        prim = prim->prox;
+        free(aux);
+        p=NULL;
+        q=NULL;
+        if(aux==fim){
+            prim = NULL;
+            fim = NULL;
+            return;
+        }
+        
+        
+        return;
+    }
 
     while(aux!=fim){
-        q = aux->ant;
+        q = aux;
+        aux = aux->prox;
+        p = aux->prox;
         if(aux->val == val){
-
+            
             printf("Removendo %d\n\n",val);
-            q->prox = aux->prox;
-            (aux->prox)->ant = q;
+            q->prox = p;
+            p->ant = q;
             if(fim == aux){
-                fim = aux->ant;
+                fim = q;
+                q->prox = prim;
             }
+            
             free(aux);
             return;
         }
-
-        aux = aux->prox;
-
+        
+        
+       
     }
-
-
-
-    printf("Elemento não encontrado\n\n");
-
+        
+    printf("Elemento nÃ£o encontrado\n\n");
 
 }
 void visualizar(){
@@ -123,29 +123,37 @@ void visualizar(){
         printf("Primeiro elemento %d\n\n",prim->val);
         return;
     }
+    
+    
     printf("Lista vazia\n\n");
-
+    
 }
 void listar(){
     if(prim!=NULL){
         p = prim;
+        printf("%d ",p->val);
     }
     else{
         printf("Lista vazia\n\n");
         return;
     }
-    while(p!=NULL){
-        printf("%d ",p->val);
+    while(p!=fim){
         p = p->prox;
+        printf("%d ",p->val);
+        
     }
     printf("\n\n");
 }
 void verifica_vazia(){
-
-        printf("Lista esta vazia\n\n");
+    if(prim!=NULL){
+        
+        printf("Lista nao esta vazia\n\n");
+    }
+    else{
+        printf("Lista vazia\n\n");
         return;
+    }
 
-    printf("Lista nao esta vazia\n\n");
 }
 
 

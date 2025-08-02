@@ -19,7 +19,7 @@ int main() {
         scanf("%d",&v[i]);
         insercao(&raiz,v[i]);
     }
-    ordena(raiz);
+    ordena(raiz,v);
 }
 
 void insercao(No **pRaiz, int numero2){
