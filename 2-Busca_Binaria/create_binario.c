@@ -21,7 +21,7 @@ int main() {
         }
     }
 
-    printf("Arquivo binário 'numeros.bin' gerado com sucesso.\n");
+    printf("Arquivo binario 'numeros.bin' gerado com sucesso.\n");
 
     fclose(arquivo);
     return 0;
